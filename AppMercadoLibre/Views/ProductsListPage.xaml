@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:AppMercadoLibre.Converters"
+             x:Class="AppMercadoLibre.Views.ProductsListPage"
+             Title="Listado de productos">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ImageConverter x:Key="ImageConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="+"
+            Command="{Binding NewCommand}">
+            <ToolbarItem.IconImageSource>
+                <OnPlatform
+                    x:TypeArguments="ImageSource">
+                    <On
+                        Platform="Android, UWP"
+                        Value="plusSing.png" />
+                </OnPlatform>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout
+             Margin="20,0,20,0"
+             Orientation="Horizontal"
+             HorizontalOptions="FillAndExpand">
+            <RefreshView
+                Command="{Binding RefreshCommand}"
+                IsRefreshing="{Binding IsBusy}">
+
+                <CollectionView
+                x:Name="ProductsList"
+                ItemsSource ="{Binding ListProducts}"
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedProduct}"
+                SelectionChangedCommand="{Binding SelectedCommand}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                Grid.RowSpan="2"
+                                HeightRequest="50"
+                                Source="{Binding Picture}"/>
+                                <Label
+                                VerticalTextAlignment="Center"
+                                HorizontalOptions="StartAndExpand"
+                                FontAttributes="Bold"
+                                Text="{Binding Model}" />
+                                <Label
+                                VerticalTextAlignment="Center"
+                                HorizontalOptions="End"
+                                Text="{Binding Price, StringFormat='${0:F2}'}" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

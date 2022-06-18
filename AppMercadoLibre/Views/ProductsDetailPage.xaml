@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:AppMercadoLibre.Converters"
+             x:Class="AppMercadoLibre.Views.ProductsDetailPage">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ImageConverter x:Key="ImageConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <!--ToolBar-->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Guardar" 
+            Command="{Binding SaveCommand}">
+        <ToolbarItem.IconImageSource>
+            <OnPlatform
+                    x:TypeArguments="ImageSource">
+                <On
+                        Platform="Android, UWP"
+                        Value="plusSing.png" />
+            </OnPlatform>
+        </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem Text="Eliminar"
+                     Command="{Binding DeleteCommand}">
+            <ToolbarItem.IconImageSource>
+                <OnPlatform
+                    x:TypeArguments="ImageSource">
+                    <On
+                        Platform="Android, UWP"
+                        Value="deleteIcon.png" />
+                </OnPlatform>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem Text="Mapa"
+                     Command="{Binding MapCommand}">
+            <ToolbarItem.IconImageSource>
+                <OnPlatform
+                    x:TypeArguments="ImageSource">
+                    <On
+                        Platform="Android, UWP"
+                        Value="mapIcon.png" />
+                </OnPlatform>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Label
+                   Text="Detalle del producto"
+                   FontAttributes="Bold"
+                   FontFamily="Large"
+                   HorizontalTextAlignment="Center"
+            />
+
+            <!--Spinner-->
+            <ActivityIndicator
+                IsRunning="{Binding IsBusy}" />
+
+            <!--Detalle-->
+            <Entry
+                Placeholder="Ingresa la categoría"
+                Text="{Binding ProductCategory}"/>
+            <Entry
+                Placeholder="Ingresa el modelo"
+                Text="{Binding ProductModel}"/>
+            <Entry
+                Placeholder="Ingresa el precio"
+                Keyboard="Numeric"
+                Text="{Binding ProductPrice}"/>
+            <Entry
+                Placeholder="Ingresa la descripción"
+                Text="{Binding ProductDescription}"/>
+            
+            <Label Text="Ubicación"
+                HorizontalOptions="CenterAndExpand" />
+            <Entry
+                Placeholder="Latitud"
+                Text="{Binding Latitude}"/>
+            <Entry
+                Placeholder="Longitud"
+                Text="{Binding Longitude}"/>
+            <Button
+                Text="Obtener ubicación automaticamente"
+                Command="{Binding GetLocationCommand}"/>
+            <Label Text="Fotografía"
+                HorizontalOptions="CenterAndExpand" />
+            <Button
+                Text="Tomar fotografía"
+                Command="{Binding TakePictureCommand}"/>
+            <Button
+                Text="Seleccionar fotografía"
+                Command="{Binding SelectPictureCommand}"/>
+            <Image
+                Source="{Binding Picture, Converter={StaticResource ImageConverter}}"
+                WidthRequest="100" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

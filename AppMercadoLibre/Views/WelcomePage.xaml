@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMercadoLibre.Views.WelcomePage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Image Source="https://images.milenio.com/U65RdHv2oyDSrjYLzKMPfDA04k8=/936x566/uploads/media/2020/03/19/codo-codo-mercado-libre-cambia_0_40_768_477.png"
+            Aspect="AspectFit"
+            HorizontalOptions="Center" />
+            <Label
+                 Text="¡BIENVENIDO!"
+                 TextColor="Black"
+                FontSize="Title"
+                 VerticalTextAlignment="Center"
+                 HorizontalOptions="Center"
+                 HeightRequest="200"
+                 FontAttributes="Bold"/>
+            <Button x:Name="button"
+                Text="Ingresar"
+                FontAttributes="Bold"
+                FontSize="Large"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="Center"
+                TextColor="Black"
+                BackgroundColor="#ffe700"
+                BorderColor="Black"
+                HeightRequest="200"
+                Clicked="GoToProductsListPage_Clicked"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
